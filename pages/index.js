@@ -5,12 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button, Typography, TextField, Box } from "@mui/material";
 import { Formik, Form, Field, FormikProps } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import app from "../utils/firebaseConfig";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { async } from "@firebase/util";
+import { useSelector } from "react-redux";
+import { userSelector } from "../store/slices/userSlice";
 
 export default function Home() {
+  const user = useSelector(userSelector);
+
   const router = useRouter();
   const auth = getAuth(app);
 
@@ -70,7 +73,7 @@ export default function Home() {
           <Box className="w-full flex h-full flex-col sm:px-4">
             <Box className="text-start">
               <Typography className="text-2xl font-bold mb-2 ">
-                Welcome to Petcare!
+                Welcome to Petcare! {user.username}
               </Typography>
               <Typography className="text-gray-400">
                 Sign In your account
