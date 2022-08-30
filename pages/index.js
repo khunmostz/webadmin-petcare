@@ -6,16 +6,15 @@ import { useRouter } from "next/router";
 import { Button, Typography, TextField, Box } from "@mui/material";
 import { Formik, Form, Field, FormikProps } from "formik";
 import React, { useEffect } from "react";
-import app from "../utils/firebaseConfig";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
-import { userSelector } from "../store/slices/userSlice";
+
+import { useSelector, useDispatch } from "react-redux";
+import { userSelector, resetUsername, signIn } from "../store/slices/userSlice";
 
 export default function Home() {
   const user = useSelector(userSelector);
+  const dispatch = useDispatch();
 
   const router = useRouter();
-  const auth = getAuth(app);
 
   const showForm = ({ values, handleSubmit, handleChange }) => {
     return (
@@ -78,28 +77,21 @@ export default function Home() {
               <Typography className="text-gray-400">
                 Sign In your account
               </Typography>
+              <button
+                onClick={() => {
+                  dispatch(resetUsername({ newUsername: "Kittabun" }));
+                }}
+              >
+                reset
+              </button>
             </Box>
             <Box className="h-full mt-4">
               <Formik
                 initialValues={{ email: "", password: "" }}
                 onSubmit={async (value) => {
                   // alert(JSON.stringify(value));
-                  try {
-                    if (value.email && value.password != null) {
-                      await signInWithEmailAndPassword(
-                        auth,
-                        value.email,
-                        value.password
-                      ).then(() => {
-                        router.push("/admin/dashboard");
-                      });
-                    } else {
-                      return;
-                    }
-                  } catch (error) {
-                    console.log(error.message);
-                    // alert(err.message);
-                  }
+                  dispatch(signIn(value));
+                  router.push("/admin/dashboard");
                 }}
               >
                 {(props) => showForm(props)}
