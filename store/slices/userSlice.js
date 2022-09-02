@@ -17,6 +17,10 @@ export const signIn = createAsyncThunk("user/signin", async (value) => {
   return value;
 });
 
+export const logOut = createAsyncThunk("user/singout",async (_) =>{
+  return await signOut(auth);
+})
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -31,11 +35,14 @@ const userSlice = createSlice({
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.email = action.payload.email;
     });
+    builder.addCase(logOut.fulfilled,(state,action)=>{
+      state.email = '';
+    })
   },
 });
 
 export const { resetUsername } = userSlice.actions;
 
-export const userSelector = (state) => state.user;
+export const userSelector = (store) => store.user;
 
 export default userSlice.reducer;

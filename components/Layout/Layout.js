@@ -21,7 +21,13 @@ import MailIcon from "@mui/icons-material/Mail";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../../utils/firebaseConfig";
-
+import PetsIcon from "@mui/icons-material/Pets";
+import Link from "next/link";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useRouter } from "next/router";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/slices/userSlice";
 const drawerWidth = 240;
 
 const auth = getAuth(app);
@@ -94,6 +100,8 @@ const Drawer = styled(MuiDrawer, {
 export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -127,7 +135,7 @@ export default function Layout({ children }) {
               component="div"
               className="font-bold"
             >
-              PETCARE-MANAGE V1.0
+              ระบบหลังบ้าน Petcare Application
             </Typography>
           </Box>
         </Toolbar>
@@ -135,6 +143,12 @@ export default function Layout({ children }) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
+            <Typography className="text-lg font-bold text-orange-300">
+              <Box className="w-full flex text-start">
+                <Typography className="text-2xl font-bold">Petcare </Typography>
+                <PetsIcon className="text-orange-300" />
+              </Box>
+            </Typography>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
@@ -143,55 +157,30 @@ export default function Layout({ children }) {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <Link href="/dashboard" passHref>
+          <ListItem
+            button
+            className={router.pathname === "/dashboard" ? "Mui-selected" : ""}
+          >
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashbaord" />
+          </ListItem>
+        </Link>
         <Divider />
-        <List>
-          {["Logout"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <ExitToApp /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <Box>
+          <ListItem
+            button
+            // onClick={dispatch(logOut())}
+            className={router.pathname === "/" ? "Mui-selected" : ""}
+          >
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

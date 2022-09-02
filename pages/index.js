@@ -77,13 +77,6 @@ export default function Home() {
               <Typography className="text-gray-400">
                 Sign In your account
               </Typography>
-              <button
-                onClick={() => {
-                  dispatch(resetUsername({ newUsername: "Kittabun" }));
-                }}
-              >
-                reset
-              </button>
             </Box>
             <Box className="h-full mt-4">
               <Formik
