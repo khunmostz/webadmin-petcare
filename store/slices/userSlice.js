@@ -2,24 +2,29 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../../utils/firebaseConfig";
 import * as serverService from "../../services/serverService";
+import { useRouter } from "next/router";
 
 const auth = getAuth(app);
 
+const router = useRouter;
+
 export const signIn = createAsyncThunk("user/signin", async (value) => {
-  const response = await signInWithEmailAndPassword(
-    auth,
-    value.email,
-    value.password
-  ).then((value) => {
-    console.log(value);
-  });
+  try {
+    const response = await signInWithEmailAndPassword(
+      auth,
+      value.email,
+      value.password
+    ).then((value) => {
+      console.log("qweqweqweq" + value);
+    });
+  } catch (error) {}
 
   return value;
 });
 
-export const logOut = createAsyncThunk("user/singout",async (_) =>{
+export const logOut = createAsyncThunk("user/singout", async (_) => {
   return await signOut(auth);
-})
+});
 
 const userSlice = createSlice({
   name: "user",
@@ -35,9 +40,9 @@ const userSlice = createSlice({
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.email = action.payload.email;
     });
-    builder.addCase(logOut.fulfilled,(state,action)=>{
-      state.email = '';
-    })
+    builder.addCase(logOut.fulfilled, (state, action) => {
+      state.email = "";
+    });
   },
 });
 

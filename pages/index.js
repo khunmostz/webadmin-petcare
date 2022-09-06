@@ -84,7 +84,7 @@ export default function Home() {
                 onSubmit={async (value) => {
                   // alert(JSON.stringify(value));
                   dispatch(signIn(value));
-                  router.push("/admin/dashboard");
+                  router.push("/dashboard");
                 }}
               >
                 {(props) => showForm(props)}

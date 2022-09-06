@@ -9,8 +9,17 @@ export const getUser = createAsyncThunk("get/user", async (_) => {
 });
 
 export const getPositions = createAsyncThunk("get/location", async (_) => {
-  console.log(await serverService.getLocations());
+  // console.log(await serverService.getLocations());
   return await serverService.getLocations();
+});
+
+export const getPromotions = createAsyncThunk("get/promotions", async (_) => {
+  // console.log(await serverService.getPromotion());
+  return await serverService.getPromotion();
+});
+export const getPets = createAsyncThunk("get/pets", async (_) => {
+  console.log(await serverService.getPets());
+  return await serverService.getPets();
 });
 
 export const dashboardSlice = createSlice({
@@ -18,6 +27,8 @@ export const dashboardSlice = createSlice({
   initialState: {
     userList: [],
     locationList: [],
+    promotionsList: [],
+    petsList: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -26,6 +37,14 @@ export const dashboardSlice = createSlice({
     });
     builder.addCase(getPositions.fulfilled, (state, action) => {
       state.locationList = action.payload.locations;
+    });
+    builder.addCase(getPromotions.fulfilled, (state, action) => {
+      // console.log(`action: ${action.payload.promotions[0]["promotionTitle"]}`);
+      state.promotionsList = action.payload.promotions;
+    });
+    builder.addCase(getPets.fulfilled, (state, action) => {
+      console.log(`action: ${action.payload.promotions[0]["promotionTitle"]}`);
+      // state.petsList = action.payload.promotions;
     });
   },
 });

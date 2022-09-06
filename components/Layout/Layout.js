@@ -19,7 +19,6 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ExitToApp from "@mui/icons-material/ExitToApp";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../../utils/firebaseConfig";
 import PetsIcon from "@mui/icons-material/Pets";
 import Link from "next/link";
@@ -27,10 +26,9 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useRouter } from "next/router";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useDispatch } from "react-redux";
+import AllInboxIcon from "@mui/icons-material/AllInbox";
 import { logOut } from "../../store/slices/userSlice";
 const drawerWidth = 240;
-
-const auth = getAuth(app);
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -145,7 +143,7 @@ export default function Layout({ children }) {
           <IconButton onClick={handleDrawerClose}>
             <Typography className="text-lg font-bold text-orange-300">
               <Box className="w-full flex text-start">
-                <Typography className="text-2xl font-bold">Petcare </Typography>
+                <Typography className="text-2xl font-bold">Petcare</Typography>
                 <PetsIcon className="text-orange-300" />
               </Box>
             </Typography>
@@ -168,11 +166,27 @@ export default function Layout({ children }) {
             <ListItemText primary="Dashbaord" />
           </ListItem>
         </Link>
+        <Link href="/dashboard/promotion" passHref>
+          <ListItem
+            button
+            className={
+              router.pathname === "/dashboard/promotion" ? "Mui-selected" : ""
+            }
+          >
+            <ListItemIcon>
+              <AllInboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Promotions" />
+          </ListItem>
+        </Link>
         <Divider />
         <Box>
           <ListItem
             button
-            // onClick={dispatch(logOut())}
+            onClick={() => {
+              dispatch(logOut());
+              router.push("/");
+            }}
             className={router.pathname === "/" ? "Mui-selected" : ""}
           >
             <ListItemIcon>
@@ -184,8 +198,9 @@ export default function Layout({ children }) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-
-        <Typography paragraph>{children}</Typography>
+        <Box className="h-full">
+          <Typography paragraph>{children}</Typography>
+        </Box>
       </Box>
     </Box>
   );
