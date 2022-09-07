@@ -18,7 +18,7 @@ export const getPromotions = createAsyncThunk("get/promotions", async (_) => {
   return await serverService.getPromotion();
 });
 export const getPets = createAsyncThunk("get/pets", async (_) => {
-  console.log(await serverService.getPets());
+  // console.log(await serverService.getPets());
   return await serverService.getPets();
 });
 
@@ -39,12 +39,11 @@ export const dashboardSlice = createSlice({
       state.locationList = action.payload.locations;
     });
     builder.addCase(getPromotions.fulfilled, (state, action) => {
-      // console.log(`action: ${action.payload.promotions[0]["promotionTitle"]}`);
       state.promotionsList = action.payload.promotions;
     });
     builder.addCase(getPets.fulfilled, (state, action) => {
-      console.log(`action: ${action.payload.promotions[0]["promotionTitle"]}`);
-      // state.petsList = action.payload.promotions;
+      state.petsList = action.payload.pets;
+      // console.log(`petList: ${state.petsList}`);
     });
   },
 });

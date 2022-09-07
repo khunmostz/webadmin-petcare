@@ -53,10 +53,10 @@ export default function Promotion() {
               <Card sx={{ maxWidth: 300 }}>
                 <CardActionArea>
                   <CardMedia
+                    className="object-contain"
                     component="img"
-                    height="200"
                     image={value["promotionImage"]}
-                    alt="green iguana"
+                    alt="promotion image"
                   />
                   <CardContent>
                     <Box className="flex flex-row justify-between items-center">
