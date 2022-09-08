@@ -2,11 +2,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import app from "../../utils/firebaseConfig";
 import * as serverService from "../../services/serverService";
-import { useRouter } from "next/router";
+import Router from "next/router";
 
 const auth = getAuth(app);
-
-const router = useRouter;
 
 export const signIn = createAsyncThunk("user/signin", async (value) => {
   try {
@@ -15,9 +13,11 @@ export const signIn = createAsyncThunk("user/signin", async (value) => {
       value.email,
       value.password
     ).then((value) => {
-      console.log("qweqweqweq" + value);
+      Router.push("/dashboard");
     });
-  } catch (error) {}
+  } catch (error) {
+    alert("ไม่พบข้อมูลในระบบ");
+  }
 
   return value;
 });

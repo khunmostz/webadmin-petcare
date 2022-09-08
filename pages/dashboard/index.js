@@ -26,19 +26,30 @@ import {
 } from "../../store/slices/dashboardSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import app from "../../utils/firebaseConfig";
+import { getAuth } from "firebase/auth";
+import Router from "next/router";
+import { async } from "@firebase/util";
+
 export default function Dashboard() {
   const dispatch = useDispatch();
 
+  const auth = getAuth(app);
+
   const dashboard = useSelector(dashboardSelector);
 
-  React.useEffect(() => {
-    try {
+  const withAuth = async () => {
+    if (!auth.currentUser) {
+      return Router.replace("/");
+    } else {
       dispatch(getUser());
       dispatch(getPositions());
       dispatch(getPets());
-    } catch (error) {
-      alert(error);
     }
+  };
+
+  React.useEffect(() => {
+    withAuth();
   }, [dispatch]);
 
   function QuickSearchToolbar() {
