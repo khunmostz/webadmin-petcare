@@ -34,9 +34,16 @@ export default function Promotion() {
     setOpen(false);
   };
 
+  const withAuth = async () => {
+    if (!auth.currentUser) {
+      return Router.replace("/");
+    } else {
+      dispatch(getPromotions());
+    }
+  };
+
   React.useEffect(() => {
-    dispatch(getPromotions());
-    console.log(`xxxxx : ${promotion.promotionsList}`);
+    withAuth();
   }, [dispatch]);
   return (
     <Layout>
