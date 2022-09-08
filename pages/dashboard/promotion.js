@@ -17,10 +17,14 @@ import AddIcon from "@mui/icons-material/Add";
 import FormDialog from "../../components/FormDialog";
 import { deletePromotion } from "../../services/serverService";
 import { useRouter } from "next/router";
+import app from "../../utils/firebaseConfig";
+import { getAuth } from "firebase/auth";
 
 export default function Promotion() {
   const promotion = useSelector(dashboardSelector);
   const dispatch = useDispatch();
+
+  const auth = getAuth(app);
 
   const router = useRouter();
 
@@ -36,7 +40,7 @@ export default function Promotion() {
 
   const withAuth = async () => {
     if (!auth.currentUser) {
-      return Router.replace("/");
+      return router.replace("/");
     } else {
       dispatch(getPromotions());
     }
