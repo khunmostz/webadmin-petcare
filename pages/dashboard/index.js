@@ -87,20 +87,6 @@ export default function Dashboard() {
       headerName: "Type",
       width: 100,
     },
-    {
-      field: ".",
-      headerName: "Actions",
-      sortable: false,
-      width: 140,
-      disableClickEventBubbling: true,
-      renderCell: (params) => {
-        return (
-          <div className="" style={{ cursor: "pointer" }}>
-            <DeleteIcon index={params.row.id} />
-          </div>
-        );
-      },
-    },
   ];
   const columnsLocations = [
     { field: "id", headerName: "ID", width: 70 },
@@ -113,20 +99,6 @@ export default function Dashboard() {
     { field: "locationLat", headerName: "Latitude", width: 130 },
     { field: "locationLong", headerName: "Longitude", width: 130 },
     { field: "locationDesc", headerName: "Location Desctiption", width: 200 },
-    {
-      field: ".",
-      headerName: "Actions",
-      sortable: false,
-      width: 140,
-      disableClickEventBubbling: true,
-      renderCell: (params) => {
-        return (
-          <div className="" style={{ cursor: "pointer" }}>
-            <DeleteIcon index={params.row.id} />
-          </div>
-        );
-      },
-    },
   ];
 
   // const columns = [
