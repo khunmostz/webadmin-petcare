@@ -49,7 +49,7 @@ export default function Promotion() {
         >
           {promotion.promotionsList.map((value) => (
             // <>1</>
-            <Grid item key={value["promotionId"]} xs={3}>
+            <Grid item key={value["promotionId"]} xs={12} sm={6} md={6} lg={3}>
               <Card sx={{ maxWidth: 300 }}>
                 <CardActionArea>
                   <CardMedia
