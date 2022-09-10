@@ -29,9 +29,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import app from "../../utils/firebaseConfig";
 import { getAuth } from "firebase/auth";
 import Router from "next/router";
-import { async } from "@firebase/util";
+import withAuth from "../../components/withAuth";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const dispatch = useDispatch();
 
   const auth = getAuth(app);
@@ -101,70 +101,6 @@ export default function Dashboard() {
     { field: "locationDesc", headerName: "Location Desctiption", width: 200 },
   ];
 
-  // const columns = [
-  //   { field: "id", headerName: "ID", width: 90 },
-  //   {
-  //     field: "firstName",
-  //     headerName: "First name",
-  //     width: 150,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "lastName",
-  //     headerName: "Last name",
-  //     width: 150,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "age",
-  //     headerName: "Age",
-  //     type: "number",
-  //     width: 110,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "fullName",
-  //     headerName: "Full name",
-  //     description: "This column has a value getter and is not sortable.",
-  //     sortable: false,
-  //     width: 160,
-  //     valueGetter: (params) =>
-  //       `${params.row.firstName || ""} ${params.row.lastName || ""}`,
-  //   },
-  //   {
-  //     field: ".",
-  //     headerName: "Actions",
-  //     sortable: false,
-  //     width: 140,
-  //     disableClickEventBubbling: true,
-  //     renderCell: (params) => {
-  //       return (
-  //         <div className="" style={{ cursor: "pointer" }}>
-  //           <DeleteIcon index={params.row.id} />
-  //         </div>
-  //       );
-  //     },
-  //   },
-  // ];
-
-  // const rows = [
-  //   {
-  //     id: 1,
-  //     lastName: "Snow",
-  //     firstName: "Jon",
-  //     age: 35,
-  //   },
-  //   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  //   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  //   { id: 10, lastName: "Roxie", firstName: "Dong", age: 65 },
-  // ];
-  // console.log(dashboard.petsList.length);
   return (
     <Layout>
       <Box className="mb-6">
@@ -238,4 +174,5 @@ export default function Dashboard() {
       </Box>
     </Layout>
   );
-}
+};
+export default Dashboard;

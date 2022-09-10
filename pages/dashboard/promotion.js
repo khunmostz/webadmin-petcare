@@ -17,14 +17,11 @@ import AddIcon from "@mui/icons-material/Add";
 import FormDialog from "../../components/FormDialog";
 import { deletePromotion } from "../../services/serverService";
 import { useRouter } from "next/router";
-import app from "../../utils/firebaseConfig";
-import { getAuth } from "firebase/auth";
+import withAuth from "../../components/withAuth";
 
-export default function Promotion() {
+const Promotion = () => {
   const promotion = useSelector(dashboardSelector);
   const dispatch = useDispatch();
-
-  const auth = getAuth(app);
 
   const router = useRouter();
 
@@ -38,16 +35,8 @@ export default function Promotion() {
     setOpen(false);
   };
 
-  const withAuth = async () => {
-    if (!auth.currentUser) {
-      return router.replace("/");
-    } else {
-      dispatch(getPromotions());
-    }
-  };
-
   React.useEffect(() => {
-    withAuth();
+    dispatch(getPromotions());
   }, [dispatch]);
   return (
     <Layout>
@@ -77,7 +66,7 @@ export default function Promotion() {
                       <Box
                         onClick={async () => {
                           await deletePromotion(value["promotionId"]);
-                          router.reload();
+                          router.push("/dashboard/promotion");
                         }}
                       >
                         <DeleteIcon />
@@ -111,4 +100,6 @@ export default function Promotion() {
       </Box>
     </Layout>
   );
-}
+};
+
+export default Promotion;

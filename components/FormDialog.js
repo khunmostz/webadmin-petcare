@@ -12,10 +12,19 @@ import Image from "next/image";
 import imgPlcholder from "../public/static/image/imageplaceholder.jpg";
 import { postPromotion } from "../services/serverService";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function FormDialog({ open, onDialogOpen, onDialogClose }) {
   const [images, setImages] = React.useState([]);
   const [imageURL, setImageURL] = React.useState([]);
+
+  const notify = React.useCallback((type, message) => {
+    toast({ type, message });
+  }, []);
+
+  const dismiss = React.useCallback(() => {
+    toast.dismiss();
+  }, []);
 
   const router = useRouter();
 
@@ -98,6 +107,7 @@ export default function FormDialog({ open, onDialogOpen, onDialogClose }) {
               height={300}
             />
           </Box>
+
           <DialogActions>
             <Button onClick={onDialogClose}>Cancel</Button>
             <Button type="submit" on>
