@@ -38,18 +38,20 @@ const Dashboard = () => {
 
   const dashboard = useSelector(dashboardSelector);
 
-  const withAuth = async () => {
-    if (!auth.currentUser) {
-      return Router.replace("/");
-    } else {
-      dispatch(getUser());
-      dispatch(getPositions());
-      dispatch(getPets());
-    }
-  };
+  // const withAuth = async () => {
+  //   if (!auth.currentUser) {
+  //     return Router.replace("/");
+  //   } else {
+  //     dispatch(getUser());
+  //     dispatch(getPositions());
+  //     dispatch(getPets());
+  //   }
+  // };
 
   React.useEffect(() => {
-    withAuth();
+    dispatch(getUser());
+    dispatch(getPositions());
+    dispatch(getPets());
   }, [dispatch]);
 
   function QuickSearchToolbar() {
