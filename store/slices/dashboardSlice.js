@@ -43,7 +43,6 @@ export const dashboardSlice = createSlice({
     });
     builder.addCase(getPets.fulfilled, (state, action) => {
       state.petsList = action.payload.pets;
-      // console.log(`petList: ${state.petsList}`);
     });
   },
 });
