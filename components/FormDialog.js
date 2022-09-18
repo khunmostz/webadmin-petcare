@@ -39,7 +39,7 @@ export default function FormDialog({ open, onDialogOpen, onDialogClose }) {
     setImages([...e.target.files]);
   }
 
-  console.log(`Images: ${images}`);
+  // console.log(`Images: ${images}`);
 
   const showForm = ({ values, handleSubmit, handleChange, setFieldValue }) => {
     return (

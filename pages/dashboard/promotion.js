@@ -66,7 +66,7 @@ const Promotion = () => {
                       <Box
                         onClick={async () => {
                           await deletePromotion(value["promotionId"]);
-                          router.push("/dashboard/promotion");
+                          router.reload();
                         }}
                       >
                         <DeleteIcon />
