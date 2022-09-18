@@ -9,7 +9,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Formik, Form, Field, FormikProps } from "formik";
 import { Box } from "@mui/material";
 import Image from "next/image";
-import imgPlcholder from "../public/static/image/imageplaceholder.jpg";
 import { postPromotion } from "../services/serverService";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";

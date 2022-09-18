@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Nav from "../components/Nav";
-import bgImage from "../public/static/image/Leadership and teamwork concept.jpg";
+import bgImage from "../public/image/Leadership and teamwork concept.jpg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button, Typography, TextField, Box } from "@mui/material";
@@ -84,7 +84,6 @@ export default function Home() {
                 onSubmit={async (value) => {
                   // alert(JSON.stringify(value));
                   dispatch(signIn(value));
-                 
                 }}
               >
                 {(props) => showForm(props)}
