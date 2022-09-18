@@ -4,7 +4,6 @@ import { store } from "../store/store";
 import "../styles/globals.css";
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = React.useState(false);
@@ -23,9 +22,6 @@ function MyApp({ Component, pageProps }) {
     return (
       <StyledEngineProvider injectFirst>
         <Provider store={store}>
-          <Head>
-            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-          </Head>
           <Component {...pageProps} />
           <ToastContainer
             position="top-right"
