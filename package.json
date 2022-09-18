@@ -2,12 +2,9 @@
   "name": "web-petcare-admin",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
