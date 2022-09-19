@@ -65,8 +65,15 @@ const Promotion = () => {
                       </Typography>
                       <Box
                         onClick={async () => {
-                          await deletePromotion(value["promotionId"]);
-                          router.reload();
+                          if (confirm("ต้องการลบข้อมูลนี้ใช่หรือไม่ ")) {
+                            await deletePromotion(value["promotionId"]);
+                            router.reload();
+                            // Save it!
+                            // console.log("Thing was saved to the database.");
+                          } else {
+                            // Do nothing!
+                            // console.log("Thing was not saved to the database.");
+                          }
                         }}
                       >
                         <DeleteIcon />
