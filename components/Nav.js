@@ -11,7 +11,7 @@ function Nav() {
           <PetsIcon className="text-orange-300" />
         </Typography>
       </Box>
-      <Box className="flex ">
+      {/* <Box className="flex ">
         <Box className="pr-4 px-5 py-1 text-sm text-gray-400">
           Already have an account?
         </Box>
@@ -20,7 +20,7 @@ function Nav() {
             Sign In
           </Button>
         </Link>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
